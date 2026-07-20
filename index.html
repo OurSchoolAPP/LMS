@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>نظام إدارة المشاريع</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- خطوط Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet" />
+    <!-- أيقونات Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+    <!-- القائمة الجانبية -->
+    <div class="sidebar">
+        <div class="logo">
+            <i class="fas fa-tree"></i>
+            <h2>نظامي</h2>
+        </div>
+        <ul class="nav-links">
+            <li onclick="showSection('home')" class="active">
+                <i class="fas fa-home"></i> الرئيسية
+            </li>
+            <li onclick="showSection('clients')">
+                <i class="fas fa-users"></i> العملاء
+            </li>
+            <li onclick="showSection('projects')">
+                <i class="fas fa-project-diagram"></i> المشاريع
+            </li>
+            <li onclick="showSection('boq')">
+                <i class="fas fa-list"></i> بنود الأعمال
+            </li>
+            <li onclick="showSection('reports')">
+                <i class="fas fa-chart-bar"></i> التقارير
+            </li>
+        </ul>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="main-content">
+
+        <!-- قسم الرئيسية -->
+        <section id="home" class="section active-section">
+            <h1>🌿 نظام إدارة المشاريع</h1>
+            <p>نظام متكامل لإدارة المشاريع من البداية حتى التسليم</p>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <i class="fas fa-users"></i>
+                    <h3>العملاء</h3>
+                    <p>إدارة بيانات العملاء ومشاريعهم</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-file-contract"></i>
+                    <h3>العقود</h3>
+                    <p>إدارة العقود والمستخلصات</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-coins"></i>
+                    <h3>المالية</h3>
+                    <p>المدفوعات والإيرادات</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>التقارير</h3>
+                    <p>تحليلات وإحصائيات فورية</p>
+                </div>
+            </div>
+
+            <!-- مؤشرات الإنجاز -->
+            <div class="stats">
+                <div class="stat-item">
+                    <span>الإنجاز المالي</span>
+                    <div class="progress-bar"><div style="width:72%">72%</div></div>
+                </div>
+                <div class="stat-item">
+                    <span>إنجاز الكميات</span>
+                    <div class="progress-bar"><div style="width:65%">65%</div></div>
+                </div>
+                <div class="stat-item">
+                    <span>التقدم الزمني</span>
+                    <div class="progress-bar"><div style="width:80%">80%</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم العملاء -->
+        <section id="clients" class="section">
+            <h2><i class="fas fa-users"></i> إدارة العملاء</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>اسم العميل</th>
+                        <th>المشاريع</th>
+                        <th>الحالة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>شركة النخبة</td>
+                        <td>3</td>
+                        <td><span class="badge active">نشط</span></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>مؤسسة الأمل</td>
+                        <td>5</td>
+                        <td><span class="badge active">نشط</span></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>شركة السلام</td>
+                        <td>1</td>
+                        <td><span class="badge inactive">منتهي</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- قسم المشاريع -->
+        <section id="projects" class="section">
+            <h2><i class="fas fa-project-diagram"></i> المشاريع</h2>
+            <div class="project-list">
+                <div class="project-card">
+                    <h3>مشروع المنتزه</h3>
+                    <p><strong>العميل:</strong> شركة النخبة</p>
+                    <p><strong>المدة:</strong> 6 أشهر</p>
+                    <span class="badge active">قيد التنفيذ</span>
+                </div>
+                <div class="project-card">
+                    <h3>مشروع الواحة</h3>
+                    <p><strong>العميل:</strong> مؤسسة الأمل</p>
+                    <p><strong>المدة:</strong> 4 أشهر</p>
+                    <span class="badge inactive">مكتمل</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم بنود الأعمال -->
+        <section id="boq" class="section">
+            <h2><i class="fas fa-list"></i> بنود الأعمال (BOQ)</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>البند</th>
+                        <th>الوصف</th>
+                        <th>الكمية</th>
+                        <th>سعر الوحدة</th>
+                        <th>الإجمالي</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>أعمال الحفر</td>
+                        <td>500 م³</td>
+                        <td>150 ج.م</td>
+                        <td>75,000 ج.م</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>الخرسانة</td>
+                        <td>200 م³</td>
+                        <td>1,200 ج.م</td>
+                        <td>240,000 ج.م</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>التشجير</td>
+                        <td>100 شجرة</td>
+                        <td>500 ج.م</td>
+                        <td>50,000 ج.م</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- قسم التقارير -->
+        <section id="reports" class="section">
+            <h2><i class="fas fa-chart-bar"></i> التقارير والتحليلات</h2>
+            <div class="report-cards">
+                <div class="report-card">
+                    <i class="fas fa-file-invoice"></i>
+                    <h4>تقرير المشاريع</h4>
+                    <p>عرض جميع المشاريع وحالتها</p>
+                    <button onclick="alert('سيتم تصدير التقرير')">تصدير</button>
+                </div>
+                <div class="report-card">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <h4>تقرير مالي</h4>
+                    <p>ملخص الإيرادات والمصروفات</p>
+                    <button onclick="alert('سيتم تصدير التقرير')">تصدير</button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
