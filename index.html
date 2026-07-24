@@ -3,202 +3,1582 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>نظام إدارة المشاريع</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>نظام Our School - إدارة المدارس المتكاملة</title>
     <!-- خطوط Google -->
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
     <!-- أيقونات Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f9fafb;
+            color: #1f2937;
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        /* اتجاه الصفحة حسب اللغة */
+        body.lang-en {
+            direction: ltr;
+            text-align: left;
+        }
+        body.lang-fr {
+            direction: ltr;
+            text-align: left;
+        }
+        body.lang-ar {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* الهيدر */
+        header {
+            background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+            color: white;
+            padding: 40px 0 60px;
+            border-radius: 0 0 40px 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* زر تبديل اللغة */
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            display: flex;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            padding: 8px 14px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        body.lang-ar .language-switcher {
+            left: auto;
+            right: 30px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 4px 12px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .lang-btn:hover {
+            color: white;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .lang-btn.active {
+            color: #1e3a5f;
+            background: #facc15;
+        }
+
+        .logo {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #facc15;
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            font-weight: 500;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+
+        /* الشارة العلوية الجديدة (للمدارس الدولية والرقم) */
+        .top-badge {
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 60px;
+            padding: 12px 30px;
+            display: inline-flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 20px 35px;
+            margin-bottom: 25px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+
+        .top-badge .badge-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #fff;
+        }
+
+        .top-badge .badge-item i {
+            color: #facc15;
+            font-size: 1.1rem;
+        }
+
+        .top-badge .phone-number {
+            background: #facc15;
+            color: #1e3a5f;
+            padding: 5px 18px;
+            border-radius: 40px;
+            font-weight: 800;
+            direction: ltr;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .top-badge .phone-number i {
+            color: #1e3a5f;
+        }
+
+        /* عرض الخصم المميز */
+        .offer-badge {
+            background: #facc15;
+            color: #1e3a5f;
+            padding: 12px 30px;
+            border-radius: 60px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(250, 204, 21, 0.4);
+            margin-top: 10px;
+        }
+
+        .offer-badge .highlight-offer {
+            background: #1e3a5f;
+            color: #facc15;
+            padding: 2px 14px;
+            border-radius: 40px;
+            margin-right: 10px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        body.lang-en .offer-badge .highlight-offer,
+        body.lang-fr .offer-badge .highlight-offer {
+            margin-right: 0;
+            margin-left: 10px;
+        }
+
+        /* أقسام البطاقات */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1e3a5f;
+            text-align: center;
+            margin: 60px 0 30px;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #facc15, #2d5a87);
+            margin: 10px auto 0;
+            border-radius: 4px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 24px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #f0f2f5;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .card.expanded {
+            grid-column: span 2;
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+            border-color: #facc15;
+            background: linear-gradient(145deg, #ffffff, #fcfcfd);
+        }
+
+        .card i {
+            font-size: 2.8rem;
+            color: #2d5a87;
+            margin-bottom: 15px;
+            background: #e8edf5;
+            padding: 15px;
+            border-radius: 20px;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            transition: all 0.3s ease;
+        }
+
+        .card.expanded i {
+            background: #facc15;
+            color: #1e3a5f;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1e3a5f;
+        }
+
+        .card .short-desc {
+            font-size: 0.95rem;
+            color: #4b5563;
+        }
+
+        .card .full-desc {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            font-size: 0.95rem;
+            color: #1f2937;
+            text-align: right;
+            line-height: 1.8;
+            margin-top: 0;
+            padding: 0 10px;
+        }
+
+        body.lang-en .card .full-desc,
+        body.lang-fr .card .full-desc {
+            text-align: left;
+        }
+
+        .card.expanded .full-desc {
+            max-height: 500px;
+            opacity: 1;
+            margin-top: 15px;
+            padding: 15px 10px;
+            border-top: 2px dashed #e5e9f0;
+        }
+
+        .card .expand-hint {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            margin-top: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .card.expanded .expand-hint {
+            color: #facc15;
+            font-weight: 700;
+        }
+
+        .card .expand-hint i {
+            font-size: 0.8rem;
+            background: transparent;
+            width: auto;
+            height: auto;
+            padding: 0;
+            margin: 0;
+            color: #9ca3af;
+        }
+
+        .card.expanded .expand-hint i {
+            color: #facc15;
+        }
+
+        /* قسم العملاء */
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+            margin: 30px 0 40px;
+        }
+
+        .client-card {
+            background: white;
+            padding: 25px 15px;
+            border-radius: 20px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+            text-align: center;
+            border: 1px solid #edf2f7;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 130px;
+        }
+
+        .client-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+            border-color: #facc15;
+        }
+
+        .client-card .client-icon {
+            font-size: 2.8rem;
+            color: #2d5a87;
+            margin-bottom: 10px;
+            background: #eef2f8;
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .client-card .client-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #1e3a5f;
+        }
+
+        .client-card .client-type {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+
+        .client-card .client-location {
+            font-size: 0.8rem;
+            color: #9ca3af;
+            margin-top: 2px;
+        }
+
+        .client-card .rating {
+            color: #facc15;
+            font-size: 0.9rem;
+            margin-top: 6px;
+            letter-spacing: 2px;
+        }
+
+        /* ===== معرض الصور ===== */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0 50px;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+            border: 1px solid #edf2f7;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-color: #facc15;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            background: #f1f5f9;
+        }
+
+        .gallery-item .caption {
+            padding: 15px 20px;
+            font-weight: 600;
+            background: white;
+            text-align: center;
+            border-top: 1px solid #f0f2f5;
+            color: #1e3a5f;
+            font-size: 1.05rem;
+        }
+
+        .gallery-item .caption i {
+            color: #facc15;
+            margin-left: 8px;
+        }
+
+        body.lang-en .gallery-item .caption i,
+        body.lang-fr .gallery-item .caption i {
+            margin-left: 0;
+            margin-right: 8px;
+        }
+
+        /* جدول المميزات */
+        .features-table-wrap {
+            background: white;
+            border-radius: 30px;
+            padding: 20px 10px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+            margin: 30px 0;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+            min-width: 500px;
+        }
+
+        th {
+            background: #1e3a5f;
+            color: white;
+            padding: 14px 16px;
+            text-align: right;
+            font-weight: 700;
+        }
+
+        body.lang-en th,
+        body.lang-fr th {
+            text-align: left;
+        }
+
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #edf2f7;
+        }
+
+        tr:hover td {
+            background: #f8fafc;
+        }
+
+        .badge-status {
+            background: #dcfce7;
+            color: #166534;
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        /* أدوار المستخدمين */
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .role-item {
+            background: white;
+            padding: 15px 10px;
+            border-radius: 60px;
+            text-align: center;
+            font-weight: 600;
+            color: #1e3a5f;
+            border: 1px solid #e5e9f0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            font-size: 0.9rem;
+        }
+
+        .role-item i {
+            margin-left: 8px;
+            color: #facc15;
+        }
+
+        body.lang-en .role-item i,
+        body.lang-fr .role-item i {
+            margin-left: 0;
+            margin-right: 8px;
+        }
+
+        /* زر العرض */
+        .cta-section {
+            text-align: center;
+            margin: 60px 0 40px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #facc15, #f59e0b);
+            color: #1e3a5f;
+            padding: 18px 50px;
+            border-radius: 60px;
+            font-weight: 800;
+            font-size: 1.3rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(250, 204, 21, 0.4);
+            transition: transform 0.2s;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.03);
+        }
+
+        /* الفوتر */
+        footer {
+            background: #1e3a5f;
+            color: #d1dbe8;
+            padding: 30px 0;
+            text-align: center;
+            border-radius: 40px 40px 0 0;
+            margin-top: 60px;
+        }
+
+        footer a {
+            color: #facc15;
+            text-decoration: none;
+        }
+
+        /* استجابة */
+        @media (max-width: 640px) {
+            .logo { font-size: 2rem; }
+            .offer-badge { font-size: 1rem; padding: 10px 20px; }
+            .section-title { font-size: 1.6rem; }
+            .card.expanded { grid-column: span 1; }
+            .gallery-item img { height: 160px; }
+            .language-switcher {
+                top: 10px;
+                left: 10px;
+                padding: 5px 10px;
+            }
+            body.lang-ar .language-switcher {
+                left: auto;
+                right: 10px;
+            }
+            .lang-btn {
+                font-size: 0.7rem;
+                padding: 2px 8px;
+            }
+            .top-badge {
+                padding: 10px 15px;
+                gap: 12px 20px;
+                flex-direction: column;
+            }
+            .top-badge .badge-item {
+                font-size: 0.8rem;
+            }
+            .offer-badge .highlight-offer {
+                display: block;
+                margin: 6px 0 0;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .card.expanded { grid-column: span 2; }
+        }
+
+        /* إخفاء/إظهار العناصر حسب اللغة */
+        .lang-ar-only,
+        .lang-en-only,
+        .lang-fr-only {
+            display: none;
+        }
+
+        body.lang-ar .lang-ar-only { display: inline; }
+        body.lang-en .lang-en-only { display: inline; }
+        body.lang-fr .lang-fr-only { display: inline; }
+
+        /* للعناصر التي تظهر في كل اللغات */
+        .lang-all {
+            display: inline;
+        }
+    </style>
 </head>
-<body>
+<body class="lang-ar">
 
-    <!-- القائمة الجانبية -->
-    <div class="sidebar">
-        <div class="logo">
-            <i class="fas fa-tree"></i>
-            <h2>نظامي</h2>
+    <header>
+        <div class="container header-content">
+            <!-- زر تبديل اللغة -->
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="ar" onclick="switchLanguage('ar')">عربي</button>
+                <button class="lang-btn" data-lang="en" onclick="switchLanguage('en')">EN</button>
+                <button class="lang-btn" data-lang="fr" onclick="switchLanguage('fr')">FR</button>
+            </div>
+
+            <!-- الشارة العلوية الجديدة -->
+            <div class="top-badge">
+                <span class="badge-item">
+                    <i class="fas fa-globe-asia"></i>
+                    <span class="lang-ar-only">مناسب للمدارس خاصة، لغات، دولية (بريطانية وأمريكية)</span>
+                    <span class="lang-en-only">Suitable for International Schools (British - American)</span>
+                    <span class="lang-fr-only">Adapté aux écoles internationales (Britannique - Américain)</span>
+                </span>
+                <span class="badge-item phone-number">
+                    <i class="fas fa-phone-alt"></i> 01005158985
+                </span>
+            </div>
+
+            <div class="logo">Our <span>School</span></div>
+            
+            <p class="tagline">
+                <span class="lang-ar-only">نظام إدارة المدارس المتكامل – من الألف إلى الياء</span>
+                <span class="lang-en-only">Comprehensive School Management System – A to Z</span>
+                <span class="lang-fr-only">Système de gestion scolaire complet – De A à Z</span>
+            </p>
+            
+            <div class="offer-badge">
+                <i class="fas fa-tags"></i>
+                <span class="lang-ar-only">خصم 70% حتى نهاية أغسطس!</span>
+                <span class="lang-en-only">70% OFF until the end of August!</span>
+                <span class="lang-fr-only">70% de réduction jusqu'à la fin d'août !</span>
+                <span class="highlight-offer">
+                    <i class="fas fa-gem"></i>
+                    <span class="lang-ar-only">3 أعوام بسعر عام واحد</span>
+                    <span class="lang-en-only">3 Years for the Price of 1</span>
+                    <span class="lang-fr-only">3 ans pour le prix d'un</span>
+                </span>
+            </div>
         </div>
-        <ul class="nav-links">
-            <li onclick="showSection('home')" class="active">
-                <i class="fas fa-home"></i> الرئيسية
-            </li>
-            <li onclick="showSection('clients')">
-                <i class="fas fa-users"></i> العملاء
-            </li>
-            <li onclick="showSection('projects')">
-                <i class="fas fa-project-diagram"></i> المشاريع
-            </li>
-            <li onclick="showSection('boq')">
-                <i class="fas fa-list"></i> بنود الأعمال
-            </li>
-            <li onclick="showSection('reports')">
-                <i class="fas fa-chart-bar"></i> التقارير
-            </li>
-        </ul>
-    </div>
+    </header>
 
-    <!-- المحتوى الرئيسي -->
-    <div class="main-content">
+    <main class="container">
 
-        <!-- قسم الرئيسية -->
-        <section id="home" class="section active-section">
-            <h1>🌿 نظام إدارة المشاريع</h1>
-            <p>نظام متكامل لإدارة المشاريع من البداية حتى التسليم</p>
-
-            <div class="cards-grid">
-                <div class="card">
-                    <i class="fas fa-users"></i>
-                    <h3>العملاء</h3>
-                    <p>إدارة بيانات العملاء ومشاريعهم</p>
+        <!-- بطاقات الميزات الرئيسية -->
+        <h2 class="section-title">
+            <span class="lang-ar-only">الميزات الرئيسية</span>
+            <span class="lang-en-only">Main Features</span>
+            <span class="lang-fr-only">Caractéristiques principales</span>
+        </h2>
+        <p style="text-align: center; color: #6b7280; margin-top: -15px; margin-bottom: 20px; font-size: 0.95rem;">
+            <i class="fas fa-hand-pointer" style="color: #facc15;"></i>
+            <span class="lang-ar-only">اضغط على أي بطاقة لقراءة التفاصيل الكاملة</span>
+            <span class="lang-en-only">Click on any card to read full details</span>
+            <span class="lang-fr-only">Cliquez sur n'importe quelle carte pour lire les détails complets</span>
+        </p>
+        <div class="grid-4" id="featuresGrid">
+            <!-- البطاقة 1: شؤون الطلاب -->
+            <div class="card" onclick="toggleCard(this)">
+                <i class="fas fa-users"></i>
+                <h3>
+                    <span class="lang-ar-only">شؤون الطلاب</span>
+                    <span class="lang-en-only">Student Affairs</span>
+                    <span class="lang-fr-only">Affaires étudiantes</span>
+                </h3>
+                <div class="short-desc">
+                    <span class="lang-ar-only">إدارة التسجيل والملفات وأولياء الأمور</span>
+                    <span class="lang-en-only">Manage registration, records, and parents</span>
+                    <span class="lang-fr-only">Gérer les inscriptions, les dossiers et les parents</span>
                 </div>
-                <div class="card">
-                    <i class="fas fa-file-contract"></i>
-                    <h3>العقود</h3>
-                    <p>إدارة العقود والمستخلصات</p>
+                <div class="full-desc">
+                    <span class="lang-ar-only">
+                        <strong>لوحة تحكم مخصصة لشؤون الطلاب،</strong> تشمل:<br>
+                        • إدارة بيانات التسجيل الأولية وحفظها وتحديثها.<br>
+                        • إنشاء الملفات الشخصية للطلاب وإدارة سجلاتهم الأكاديمية والإدارية.<br>
+                        • حفظ وتحديث بيانات أولياء الأمور وربطهم بالطلاب.<br>
+                        • متابعة كاملة لمسار الطالب منذ التسجيل حتى التخرج.
+                    </span>
+                    <span class="lang-en-only">
+                        <strong>A dedicated dashboard for student affairs,</strong> including:<br>
+                        • Manage and update initial registration data.<br>
+                        • Create student profiles and manage academic and administrative records.<br>
+                        • Save and update parent data and link them to students.<br>
+                        • Full tracking of student progress from enrollment to graduation.
+                    </span>
+                    <span class="lang-fr-only">
+                        <strong>Un tableau de bord dédié aux affaires étudiantes,</strong> comprenant :<br>
+                        • Gérer et mettre à jour les données d'inscription initiales.<br>
+                        • Créer des profils d'étudiants et gérer les dossiers académiques et administratifs.<br>
+                        • Enregistrer et mettre à jour les données des parents et les lier aux étudiants.<br>
+                        • Suivi complet du parcours de l'étudiant de l'inscription à l'obtention du diplôme.
+                    </span>
                 </div>
-                <div class="card">
-                    <i class="fas fa-coins"></i>
-                    <h3>المالية</h3>
-                    <p>المدفوعات والإيرادات</p>
-                </div>
-                <div class="card">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>التقارير</h3>
-                    <p>تحليلات وإحصائيات فورية</p>
+                <div class="expand-hint">
+                    <i class="fas fa-chevron-down"></i>
+                    <span class="lang-ar-only">اضغط لعرض التفاصيل</span>
+                    <span class="lang-en-only">Click to show details</span>
+                    <span class="lang-fr-only">Cliquez pour afficher les détails</span>
                 </div>
             </div>
 
-            <!-- مؤشرات الإنجاز -->
-            <div class="stats">
-                <div class="stat-item">
-                    <span>الإنجاز المالي</span>
-                    <div class="progress-bar"><div style="width:72%">72%</div></div>
+            <!-- البطاقة 2: المحاسبة -->
+            <div class="card" onclick="toggleCard(this)">
+                <i class="fas fa-coins"></i>
+                <h3>
+                    <span class="lang-ar-only">المحاسبة</span>
+                    <span class="lang-en-only">Accounting</span>
+                    <span class="lang-fr-only">Comptabilité</span>
+                </h3>
+                <div class="short-desc">
+                    <span class="lang-ar-only">الرسوم، الخصومات، الأقساط، والتقارير</span>
+                    <span class="lang-en-only">Fees, discounts, installments, and reports</span>
+                    <span class="lang-fr-only">Frais, remises, paiements échelonnés et rapports</span>
                 </div>
-                <div class="stat-item">
-                    <span>إنجاز الكميات</span>
-                    <div class="progress-bar"><div style="width:65%">65%</div></div>
+                <div class="full-desc">
+                    <span class="lang-ar-only">
+                        <strong>نظام محاسبي متكامل يشمل:</strong><br>
+                        • إدارة رسوم الصفوف الدراسية (عرض/إضافة/تعديل).<br>
+                        • تحديد مواعيد الدفع وإدارة تفاصيل البنوك.<br>
+                        • إدارة الخصومات وخصومات الأشقاء (عرض/إضافة/تعديل).<br>
+                        • نظام تقسيط وتأجيل الرسوم مع إمكانية الحذف والطباعة.<br>
+                        • إنشاء فواتير جماعية أو فردية للطلاب.<br>
+                        • تحديد مواعيد الغرامات والعقوبات المالية.<br>
+                        • تقارير مالية شاملة ومتنوعة.
+                    </span>
+                    <span class="lang-en-only">
+                        <strong>An integrated accounting system includes:</strong><br>
+                        • Manage grade fees (view/add/edit).<br>
+                        • Set payment dates and manage bank details.<br>
+                        • Manage discounts and sibling discounts (view/add/edit).<br>
+                        • Installment and postponement system with delete and print options.<br>
+                        • Generate bulk or individual student invoices.<br>
+                        • Set penalty dates and financial sanctions.<br>
+                        • Comprehensive and diverse financial reports.
+                    </span>
+                    <span class="lang-fr-only">
+                        <strong>Un système comptable intégré comprend :</strong><br>
+                        • Gérer les frais de scolarité (voir/ajouter/modifier).<br>
+                        • Définir les dates de paiement et gérer les coordonnées bancaires.<br>
+                        • Gérer les remises et les remises pour fratrie (voir/ajouter/modifier).<br>
+                        • Système de paiement échelonné et de report avec suppression et impression.<br>
+                        • Générer des factures groupées ou individuelles pour les étudiants.<br>
+                        • Définir les dates de pénalités et les sanctions financières.<br>
+                        • Rapports financiers complets et variés.
+                    </span>
                 </div>
-                <div class="stat-item">
-                    <span>التقدم الزمني</span>
-                    <div class="progress-bar"><div style="width:80%">80%</div></div>
+                <div class="expand-hint">
+                    <i class="fas fa-chevron-down"></i>
+                    <span class="lang-ar-only">اضغط لعرض التفاصيل</span>
+                    <span class="lang-en-only">Click to show details</span>
+                    <span class="lang-fr-only">Cliquez pour afficher les détails</span>
                 </div>
             </div>
-        </section>
 
-        <!-- قسم العملاء -->
-        <section id="clients" class="section">
-            <h2><i class="fas fa-users"></i> إدارة العملاء</h2>
-            <table class="data-table">
+            <!-- البطاقة 3: النقل المدرسي -->
+            <div class="card" onclick="toggleCard(this)">
+                <i class="fas fa-bus"></i>
+                <h3>
+                    <span class="lang-ar-only">النقل المدرسي</span>
+                    <span class="lang-en-only">School Transportation</span>
+                    <span class="lang-fr-only">Transport scolaire</span>
+                </h3>
+                <div class="short-desc">
+                    <span class="lang-ar-only">المسارات، السائقين، والمركبات</span>
+                    <span class="lang-en-only">Routes, drivers, and vehicles</span>
+                    <span class="lang-fr-only">Itinéraires, chauffeurs et véhicules</span>
+                </div>
+                <div class="full-desc">
+                    <span class="lang-ar-only">
+                        <strong>إدارة متكاملة للنقل المدرسي تشمل:</strong><br>
+                        • إدارة المناطق والمناطق الجغرافية.<br>
+                        • تسجيل بيانات السائقين والمركبات.<br>
+                        • تحديد مسارات الرحلات وتوزيع الطلاب على الحافلات.<br>
+                        • إدارة بوابات الدخول والخروج.<br>
+                        • إنهاء خدمة المركبات.<br>
+                        • تقارير النقل المدرسي الشاملة.
+                    </span>
+                    <span class="lang-en-only">
+                        <strong>An integrated school transportation management includes:</strong><br>
+                        • Manage zones and geographical areas.<br>
+                        • Register driver and vehicle data.<br>
+                        • Define trip routes and assign students to buses.<br>
+                        • Manage entry and exit gates.<br>
+                        • Terminate vehicle service.<br>
+                        • Comprehensive school transportation reports.
+                    </span>
+                    <span class="lang-fr-only">
+                        <strong>Une gestion intégrée du transport scolaire comprend :</strong><br>
+                        • Gérer les zones et les zones géographiques.<br>
+                        • Enregistrer les données des chauffeurs et des véhicules.<br>
+                        • Définir les itinéraires et attribuer les étudiants aux bus.<br>
+                        • Gérer les portes d'entrée et de sortie.<br>
+                        • Mettre fin au service des véhicules.<br>
+                        • Rapports complets sur le transport scolaire.
+                    </span>
+                </div>
+                <div class="expand-hint">
+                    <i class="fas fa-chevron-down"></i>
+                    <span class="lang-ar-only">اضغط لعرض التفاصيل</span>
+                    <span class="lang-en-only">Click to show details</span>
+                    <span class="lang-fr-only">Cliquez pour afficher les détails</span>
+                </div>
+            </div>
+
+            <!-- البطاقة 4: المكتبة -->
+            <div class="card" onclick="toggleCard(this)">
+                <i class="fas fa-book-open"></i>
+                <h3>
+                    <span class="lang-ar-only">المكتبة</span>
+                    <span class="lang-en-only">Library</span>
+                    <span class="lang-fr-only">Bibliothèque</span>
+                </h3>
+                <div class="short-desc">
+                    <span class="lang-ar-only">سجلات الكتب، الاستعارة، والإرجاع</span>
+                    <span class="lang-en-only">Book records, borrowing, and returns</span>
+                    <span class="lang-fr-only">Registres de livres, emprunts et retours</span>
+                </div>
+                <div class="full-desc">
+                    <span class="lang-ar-only">
+                        <strong>نظام إدارة المكتبة يشمل:</strong><br>
+                        • إعداد بيانات المكتبة الأولية (التصنيفات والإعدادات).<br>
+                        • إدارة سجلات الكتب (إضافة/تعديل/حذف).<br>
+                        • متابعة عملية استعارة الكتب وإعادتها.<br>
+                        • تقارير عن الكتب الأكثر استعارة والموجودات.
+                    </span>
+                    <span class="lang-en-only">
+                        <strong>The library management system includes:</strong><br>
+                        • Set up initial library data (categories and settings).<br>
+                        • Manage book records (add/edit/delete).<br>
+                        • Track book borrowing and return processes.<br>
+                        • Reports on most borrowed books and available items.
+                    </span>
+                    <span class="lang-fr-only">
+                        <strong>Le système de gestion de bibliothèque comprend :</strong><br>
+                        • Configurer les données initiales de la bibliothèque (catégories et paramètres).<br>
+                        • Gérer les registres de livres (ajouter/modifier/supprimer).<br>
+                        • Suivre les processus d'emprunt et de retour de livres.<br>
+                        • Rapports sur les livres les plus empruntés et les articles disponibles.
+                    </span>
+                </div>
+                <div class="expand-hint">
+                    <i class="fas fa-chevron-down"></i>
+                    <span class="lang-ar-only">اضغط لعرض التفاصيل</span>
+                    <span class="lang-en-only">Click to show details</span>
+                    <span class="lang-fr-only">Cliquez pour afficher les détails</span>
+                </div>
+            </div>
+
+            <!-- البطاقة 5: الدرجات -->
+            <div class="card" onclick="toggleCard(this)">
+                <i class="fas fa-chart-line"></i>
+                <h3>
+                    <span class="lang-ar-only">الدرجات</span>
+                    <span class="lang-en-only">Grades</span>
+                    <span class="lang-fr-only">Notes</span>
+                </h3>
+                <div class="short-desc">
+                    <span class="lang-ar-only">الشهور، الامتحانات، والتقييمات</span>
+                    <span class="lang-en-only">Months, exams, and assessments</span>
+                    <span class="lang-fr-only">Mois, examens et évaluations</span>
+                </div>
+                <div class="full-desc">
+                    <span class="lang-ar-only">
+                        <strong>التحكم بالدرجات الأكاديمية يشمل:</strong><br>
+                        • إدارة الأشهر الأكاديمية وإنشاء الامتحانات والتقييمات.<br>
+                        • إدارة التقييمات والتعليقات الأكاديمية.<br>
+                        • ترتيب الطلاب وترقيمهم (سري/جلوس).<br>
+                        • إدخال الدرجات برقم سري.<br>
+                        • مراجعة الدرجات حسب المراحل (الابتدائي، العملي، الإعدادي، الرياضيات).<br>
+                        • تقارير معدلات الدرجات العامة.
+                    </span>
+                    <span class="lang-en-only">
+                        <strong>Academic grade control includes:</strong><br>
+                        • Manage academic months and create exams and assessments.<br>
+                        • Manage academic evaluations and comments.<br>
+                        • Arrange and number students (secret/seating).<br>
+                        • Enter grades using a secret number.<br>
+                        • Review grades by stage (primary, practical, preparatory, math).<br>
+                        • General grade average reports.
+                    </span>
+                    <span class="lang-fr-only">
+                        <strong>Le contrôle des notes académiques comprend :</strong><br>
+                        • Gérer les mois académiques et créer des examens et évaluations.<br>
+                        • Gérer les évaluations et commentaires académiques.<br>
+                        • Organiser et numéroter les étudiants (secret/placement).<br>
+                        • Saisir les notes à l'aide d'un numéro secret.<br>
+                        • Réviser les notes par étape (primaire, pratique, préparatoire, mathématiques).<br>
+                        • Rapports sur les moyennes générales des notes.
+                    </span>
+                </div>
+                <div class="expand-hint">
+                    <i class="fas fa-chevron-down"></i>
+                    <span class="lang-ar-only">اضغط لعرض التفاصيل</span>
+                    <span class="lang-en-only">Click to show details</span>
+                    <span class="lang-fr-only">Cliquez pour afficher les détails</span>
+                </div>
+            </div>
+
+            <!-- البطاقة 6: الموارد البشرية -->
+            <div class="card" onclick="toggleCard(this)">
+                <i class="fas fa-user-tie"></i>
+                <h3>
+                    <span class="lang-ar-only">الموارد البشرية</span>
+                    <span class="lang-en-only">Human Resources</span>
+                    <span class="lang-fr-only">Ressources humaines</span>
+                </h3>
+                <div class="short-desc">
+                    <span class="lang-ar-only">الرواتب، الإجازات، والحضور</span>
+                    <span class="lang-en-only">Salaries, leaves, and attendance</span>
+                    <span class="lang-fr-only">Salaires, congés et présence</span>
+                </div>
+                <div class="full-desc">
+                    <span class="lang-ar-only">
+                        <strong>إدارة الموارد البشرية تشمل:</strong><br>
+                        • إدارة الفروع والإدارات وتحديد العطلات والإجازات الرسمية.<br>
+                        • إدارة بيانات الموظفين (دوام كامل/جزئي).<br>
+                        • نظام الرواتب، القروض، الاستقطاعات، والبدلات.<br>
+                        • تسجيل الحضور والانصراف وبصمة الوقت.<br>
+                        • إدارة علاقة الموظفين بذويهم.<br>
+                        • معالجة الطلبات الإدارية الخاصة بالموظفين.
+                    </span>
+                    <span class="lang-en-only">
+                        <strong>Human Resources management includes:</strong><br>
+                        • Manage branches and departments and set holidays and official leaves.<br>
+                        • Manage employee data (full-time/part-time).<br>
+                        • Salary, loan, deduction, and allowance system.<br>
+                        • Record attendance, departure, and time stamps.<br>
+                        • Manage employee relationships with their families.<br>
+                        • Process administrative requests for employees.
+                    </span>
+                    <span class="lang-fr-only">
+                        <strong>La gestion des ressources humaines comprend :</strong><br>
+                        • Gérer les succursales et départements et définir les jours fériés et congés officiels.<br>
+                        • Gérer les données des employés (temps plein/temps partiel).<br>
+                        • Système de salaires, prêts, déductions et indemnités.<br>
+                        • Enregistrer les présences, départs et horodatages.<br>
+                        • Gérer les relations des employés avec leurs familles.<br>
+                        • Traiter les demandes administratives des employés.
+                    </span>
+                </div>
+                <div class="expand-hint">
+                    <i class="fas fa-chevron-down"></i>
+                    <span class="lang-ar-only">اضغط لعرض التفاصيل</span>
+                    <span class="lang-en-only">Click to show details</span>
+                    <span class="lang-fr-only">Cliquez pour afficher les détails</span>
+                </div>
+            </div>
+
+            <!-- البطاقة 7: الصلاحيات -->
+            <div class="card" onclick="toggleCard(this)">
+                <i class="fas fa-shield-alt"></i>
+                <h3>
+                    <span class="lang-ar-only">الصلاحيات</span>
+                    <span class="lang-en-only">Privileges</span>
+                    <span class="lang-fr-only">Privilèges</span>
+                </h3>
+                <div class="short-desc">
+                    <span class="lang-ar-only">إدارة الأدوار والوصول للبيانات</span>
+                    <span class="lang-en-only">Manage roles and data access</span>
+                    <span class="lang-fr-only">Gérer les rôles et l'accès aux données</span>
+                </div>
+                <div class="full-desc">
+                    <span class="lang-ar-only">
+                        <strong>نظام الصلاحيات والإذونات يشمل:</strong><br>
+                        • إعداد الصلاحيات الأولية.<br>
+                        • إدارة أدوار المستخدمين (Admin، SMT، HOD).<br>
+                        • صلاحيات مخصصة لكل من المديرين، الإدارة العليا، ورؤساء الأقسام.<br>
+                        • تحكم دقيق في الوصول إلى البيانات والعمليات.
+                    </span>
+                    <span class="lang-en-only">
+                        <strong>The privileges and permissions system includes:</strong><br>
+                        • Set up initial privileges.<br>
+                        • Manage user roles (Admin, SMT, HOD).<br>
+                        • Custom privileges for administrators, senior management, and HODs.<br>
+                        • Precise control over access to data and processes.
+                    </span>
+                    <span class="lang-fr-only">
+                        <strong>Le système de privilèges et d'autorisations comprend :</strong><br>
+                        • Configurer les privilèges initiaux.<br>
+                        • Gérer les rôles des utilisateurs (Admin, SMT, HOD).<br>
+                        • Privilèges personnalisés pour les administrateurs, la direction générale et les chefs de département.<br>
+                        • Contrôle précis de l'accès aux données et aux processus.
+                    </span>
+                </div>
+                <div class="expand-hint">
+                    <i class="fas fa-chevron-down"></i>
+                    <span class="lang-ar-only">اضغط لعرض التفاصيل</span>
+                    <span class="lang-en-only">Click to show details</span>
+                    <span class="lang-fr-only">Cliquez pour afficher les détails</span>
+                </div>
+            </div>
+
+            <!-- البطاقة 8: التقويم -->
+            <div class="card" onclick="toggleCard(this)">
+                <i class="fas fa-calendar-check"></i>
+                <h3>
+                    <span class="lang-ar-only">التقويم</span>
+                    <span class="lang-en-only">Calendar</span>
+                    <span class="lang-fr-only">Calendrier</span>
+                </h3>
+                <div class="short-desc">
+                    <span class="lang-ar-only">الفعاليات والمواعيد الأكاديمية</span>
+                    <span class="lang-en-only">Academic events and dates</span>
+                    <span class="lang-fr-only">Événements et dates académiques</span>
+                </div>
+                <div class="full-desc">
+                    <span class="lang-ar-only">
+                        <strong>إدارة التقويم الأكاديمي تشمل:</strong><br>
+                        • إضافة التواريخ والفعاليات الأكاديمية المهمة.<br>
+                        • عرض التقويم الدراسي السنوي.<br>
+                        • حذف الأحداث عند الحاجة.<br>
+                        • تنبيهات للمناسبات القادمة.
+                    </span>
+                    <span class="lang-en-only">
+                        <strong>Academic calendar management includes:</strong><br>
+                        • Add important academic dates and events.<br>
+                        • View the annual academic calendar.<br>
+                        • Delete events when needed.<br>
+                        • Alerts for upcoming occasions.
+                    </span>
+                    <span class="lang-fr-only">
+                        <strong>La gestion du calendrier académique comprend :</strong><br>
+                        • Ajouter des dates et événements académiques importants.<br>
+                        • Visualiser le calendrier académique annuel.<br>
+                        • Supprimer des événements si nécessaire.<br>
+                        • Alertes pour les occasions à venir.
+                    </span>
+                </div>
+                <div class="expand-hint">
+                    <i class="fas fa-chevron-down"></i>
+                    <span class="lang-ar-only">اضغط لعرض التفاصيل</span>
+                    <span class="lang-en-only">Click to show details</span>
+                    <span class="lang-fr-only">Cliquez pour afficher les détails</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ====== قسم التكاملات الجديد ====== -->
+        <h2 class="section-title">
+            <span class="lang-ar-only">تكاملات ذكية</span>
+            <span class="lang-en-only">Smart Integrations</span>
+            <span class="lang-fr-only">Intégrations intelligentes</span>
+        </h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 20px 0 40px;">
+            <div style="background: white; padding: 20px 15px; border-radius: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid #edf2f7;">
+                <i class="fab fa-microsoft" style="font-size: 2.5rem; color: #1e3a5f;"></i>
+                <p style="font-weight: 700; margin-top: 8px; color: #1e3a5f;">Microsoft Teams</p>
+                <p style="font-size: 0.85rem; color: #4b5563;">
+                    <span class="lang-ar-only">تكامل كامل للحصص الافتراضية</span>
+                    <span class="lang-en-only">Full integration for virtual classes</span>
+                    <span class="lang-fr-only">Intégration complète pour les cours virtuels</span>
+                </p>
+            </div>
+            <div style="background: white; padding: 20px 15px; border-radius: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid #edf2f7;">
+                <i class="fas fa-video" style="font-size: 2.5rem; color: #1e3a5f;"></i>
+                <p style="font-weight: 700; margin-top: 8px; color: #1e3a5f;">Zoom</p>
+                <p style="font-size: 0.85rem; color: #4b5563;">
+                    <span class="lang-ar-only">التواصل المرئي والاجتماعات</span>
+                    <span class="lang-en-only">Visual communication and meetings</span>
+                    <span class="lang-fr-only">Communication visuelle et réunions</span>
+                </p>
+            </div>
+            <div style="background: white; padding: 20px 15px; border-radius: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid #edf2f7;">
+                <i class="fas fa-landmark" style="font-size: 2.5rem; color: #1e3a5f;"></i>
+                <p style="font-weight: 700; margin-top: 8px; color: #1e3a5f;">
+                    <span class="lang-ar-only">منظومة الضرائب المصرية</span>
+                    <span class="lang-en-only">Egyptian Tax Authority</span>
+                    <span class="lang-fr-only">Autorité fiscale égyptienne</span>
+                </p>
+                <p style="font-size: 0.85rem; color: #4b5563;">
+                    <span class="lang-ar-only">تسجيل الفواتير تلقائياً</span>
+                    <span class="lang-en-only">Automatic invoice registration</span>
+                    <span class="lang-fr-only">Enregistrement automatique des factures</span>
+                </p>
+            </div>
+            <div style="background: white; padding: 20px 15px; border-radius: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid #edf2f7;">
+                <i class="fas fa-credit-card" style="font-size: 2.5rem; color: #1e3a5f;"></i>
+                <p style="font-weight: 700; margin-top: 8px; color: #1e3a5f;">
+                    <span class="lang-ar-only">بوابات الدفع</span>
+                    <span class="lang-en-only">Payment Gateways</span>
+                    <span class="lang-fr-only">Passerelles de paiement</span>
+                </p>
+                <p style="font-size: 0.85rem; color: #4b5563;">
+                    <span class="lang-ar-only">فورى - أمان - كاشير</span>
+                    <span class="lang-en-only">Fawry - Aman - Cashier</span>
+                    <span class="lang-fr-only">Fawry - Aman - Cashier</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- ====== قسم عملاءنا الحالين ====== -->
+        <h2 class="section-title">
+            <span class="lang-ar-only">عملاءنا الحالين</span>
+            <span class="lang-en-only">Our Current Clients</span>
+            <span class="lang-fr-only">Nos clients actuels</span>
+        </h2>
+        <p style="text-align: center; color: #4b5563; max-width: 600px; margin: -10px auto 30px;">
+            <span class="lang-ar-only">تثق بهذه المؤسسات التعليمية المرموقة في إدارة مدارسها بنظام Our School</span>
+            <span class="lang-en-only">These prestigious educational institutions trust Our School to manage their schools</span>
+            <span class="lang-fr-only">Ces institutions éducatives prestigieuses font confiance à Our School pour gérer leurs écoles</span>
+        </p>
+        <div class="clients-grid">
+            <div class="client-card">
+                <div class="client-icon"><i class="fas fa-school"></i></div>
+                <div class="client-name">مدارس طيبة المتكاملة</div>
+                <div class="client-type">مدرسة خاصة (بنين وبنات)</div>
+                <div class="client-location">القاهرة - مصر</div>
+                <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            </div>
+            <div class="client-card">
+                <div class="client-icon"><i class="fas fa-university"></i></div>
+                <div class="client-name">طيبة الامريكية</div>
+                <div class="client-type">مدرسة دولية (منهج أمريكي)</div>
+                <div class="client-location">القاهرة - مصر</div>
+                <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            </div>
+            <div class="client-card">
+                <div class="client-icon"><i class="fas fa-graduation-cap"></i></div>
+                <div class="client-name">المدارس البريطانية بالقاهرة</div>
+                <div class="client-type">مدرسة دولية (منهج بريطانية)</div>
+                <div class="client-location">القاهرة - مصر</div>
+                <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            </div>
+            <div class="client-card">
+                <div class="client-icon"><i class="fas fa-landmark"></i></div>
+                <div class="client-name">سيبس المتقدمة للغات</div>
+                <div class="client-type">مدرسة خاصة (شبه دوليه)</div>
+                <div class="client-location">القاهرة - مصر</div>
+                <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            </div>
+        </div>
+
+        <!-- ====== معرض التطبيق ====== -->
+        <h2 class="section-title">
+            <span class="lang-ar-only">معرض التطبيق</span>
+            <span class="lang-en-only">App Gallery</span>
+            <span class="lang-fr-only">Galerie de l'application</span>
+        </h2>
+        <p style="text-align: center; color: #6b7280; max-width: 500px; margin: -10px auto 30px; font-size: 0.95rem;">
+            <i class="fas fa-camera" style="color: #facc15;"></i>
+            <span class="lang-ar-only">لقطات من داخل نظام Our School</span>
+            <span class="lang-en-only">Screenshots from inside Our School system</span>
+            <span class="lang-fr-only">Captures d'écran du système Our School</span>
+        </p>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img 
+                    src="Dashboard.jpg" 
+                    alt="لوحة التحكم - نظام إدارة المدارس"
+                    loading="lazy"
+                />
+                <div class="caption"><i class="fas fa-chart-pie"></i> 
+                    <span class="lang-ar-only">لوحة التحكم الرئيسية</span>
+                    <span class="lang-en-only">Main Dashboard</span>
+                    <span class="lang-fr-only">Tableau de bord principal</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img 
+                    src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&h=400&fit=crop&crop=center" 
+                    alt="إدارة الطلاب - نظام إدارة المدارس"
+                    loading="lazy"
+                />
+                <div class="caption"><i class="fas fa-users"></i> 
+                    <span class="lang-ar-only">إدارة شؤون الطلاب</span>
+                    <span class="lang-en-only">Student Affairs Management</span>
+                    <span class="lang-fr-only">Gestion des affaires étudiantes</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img 
+                    src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop&crop=center" 
+                    alt="النظام المحاسبي - نظام إدارة المدارس"
+                    loading="lazy"
+                />
+                <div class="caption"><i class="fas fa-coins"></i> 
+                    <span class="lang-ar-only">النظام المحاسبي</span>
+                    <span class="lang-en-only">Accounting System</span>
+                    <span class="lang-fr-only">Système comptable</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img 
+                    src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&h=400&fit=crop&crop=center" 
+                    alt="النقل المدرسي - نظام إدارة المدارس"
+                    loading="lazy"
+                />
+                <div class="caption"><i class="fas fa-bus"></i> 
+                    <span class="lang-ar-only">إدارة النقل المدرسي</span>
+                    <span class="lang-en-only">School Transportation Management</span>
+                    <span class="lang-fr-only">Gestion du transport scolaire</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img 
+                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&crop=center" 
+                    alt="التقارير والتحليلات - نظام إدارة المدارس"
+                    loading="lazy"
+                />
+                <div class="caption"><i class="fas fa-chart-bar"></i> 
+                    <span class="lang-ar-only">التقارير والتحليلات</span>
+                    <span class="lang-en-only">Reports and Analytics</span>
+                    <span class="lang-fr-only">Rapports et analyses</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img 
+                    src="Hr.jpg" 
+                    alt="إدارة الموارد البشرية - نظام إدارة المدارس"
+                    loading="lazy"
+                />
+                <div class="caption"><i class="fas fa-user-tie"></i> 
+                    <span class="lang-ar-only">إدارة الموارد البشرية</span>
+                    <span class="lang-en-only">Human Resources Management</span>
+                    <span class="lang-fr-only">Gestion des ressources humaines</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- أدوار المستخدمين -->
+        <h2 class="section-title">
+            <span class="lang-ar-only">منصتنا مناسبة لـ</span>
+            <span class="lang-en-only">Our Platform is Suitable For</span>
+            <span class="lang-fr-only">Notre plateforme est adaptée pour</span>
+        </h2>
+        <div class="roles-grid">
+            <div class="role-item"><i class="fas fa-user-graduate"></i> 
+                <span class="lang-ar-only">الطالب</span>
+                <span class="lang-en-only">Student</span>
+                <span class="lang-fr-only">Étudiant</span>
+            </div>
+            <div class="role-item"><i class="fas fa-user-friends"></i> 
+                <span class="lang-ar-only">ولي الأمر</span>
+                <span class="lang-en-only">Parent</span>
+                <span class="lang-fr-only">Parent</span>
+            </div>
+            <div class="role-item"><i class="fas fa-chalkboard-teacher"></i> 
+                <span class="lang-ar-only">المعلم</span>
+                <span class="lang-en-only">Teacher</span>
+                <span class="lang-fr-only">Enseignant</span>
+            </div>
+            <div class="role-item"><i class="fas fa-user-tie"></i> 
+                <span class="lang-ar-only">رئيس القسم</span>
+                <span class="lang-en-only">Head of Department</span>
+                <span class="lang-fr-only">Chef de département</span>
+            </div>
+            <div class="role-item"><i class="fas fa-user-cog"></i> 
+                <span class="lang-ar-only">الإداري</span>
+                <span class="lang-en-only">Administrator</span>
+                <span class="lang-fr-only">Administrateur</span>
+            </div>
+            <div class="role-item"><i class="fas fa-user-graduate"></i> 
+                <span class="lang-ar-only">مدير المرحلة</span>
+                <span class="lang-en-only">Stage Manager</span>
+                <span class="lang-fr-only">Directeur de stage</span>
+            </div>
+            <div class="role-item"><i class="fas fa-user-tie"></i> 
+                <span class="lang-ar-only">مدير المدرسة</span>
+                <span class="lang-en-only">School Principal</span>
+                <span class="lang-fr-only">Directeur d'école</span>
+            </div>
+            <div class="role-item"><i class="fas fa-crown"></i> 
+                <span class="lang-ar-only">صاحب المدرسة</span>
+                <span class="lang-en-only">School Owner</span>
+                <span class="lang-fr-only">Propriétaire de l'école</span>
+            </div>
+        </div>
+
+        <!-- قائمة الميزات التفصيلية (جدول) -->
+        <h2 class="section-title">
+            <span class="lang-ar-only">جميع الوحدات والميزات</span>
+            <span class="lang-en-only">All Modules and Features</span>
+            <span class="lang-fr-only">Tous les modules et fonctionnalités</span>
+        </h2>
+        <div class="features-table-wrap">
+            <table>
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>اسم العميل</th>
-                        <th>المشاريع</th>
-                        <th>الحالة</th>
+                        <th>
+                            <span class="lang-ar-only">الوحدة</span>
+                            <span class="lang-en-only">Module</span>
+                            <span class="lang-fr-only">Module</span>
+                        </th>
+                        <th>
+                            <span class="lang-ar-only">الميزات الأساسية</span>
+                            <span class="lang-en-only">Core Features</span>
+                            <span class="lang-fr-only">Fonctionnalités principales</span>
+                        </th>
+                        <th>
+                            <span class="lang-ar-only">الحالة</span>
+                            <span class="lang-en-only">Status</span>
+                            <span class="lang-fr-only">Statut</span>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>1</td>
-                        <td>شركة النخبة</td>
-                        <td>3</td>
-                        <td><span class="badge active">نشط</span></td>
+                        <td>
+                            <span class="lang-ar-only">شؤون الطلاب</span>
+                            <span class="lang-en-only">Student Affairs</span>
+                            <span class="lang-fr-only">Affaires étudiantes</span>
+                        </td>
+                        <td>
+                            <span class="lang-ar-only">التسجيل، الملفات، أولياء الأمور</span>
+                            <span class="lang-en-only">Registration, records, parents</span>
+                            <span class="lang-fr-only">Inscription, dossiers, parents</span>
+                        </td>
+                        <td><span class="badge-status">
+                            <span class="lang-ar-only">متكاملة</span>
+                            <span class="lang-en-only">Integrated</span>
+                            <span class="lang-fr-only">Intégré</span>
+                        </span></td>
                     </tr>
                     <tr>
-                        <td>2</td>
-                        <td>مؤسسة الأمل</td>
-                        <td>5</td>
-                        <td><span class="badge active">نشط</span></td>
+                        <td>
+                            <span class="lang-ar-only">المحاسبة</span>
+                            <span class="lang-en-only">Accounting</span>
+                            <span class="lang-fr-only">Comptabilité</span>
+                        </td>
+                        <td>
+                            <span class="lang-ar-only">الرسوم، الخصومات، الأقساط، التقارير</span>
+                            <span class="lang-en-only">Fees, discounts, installments, reports</span>
+                            <span class="lang-fr-only">Frais, remises, échéanciers, rapports</span>
+                        </td>
+                        <td><span class="badge-status">
+                            <span class="lang-ar-only">متكاملة</span>
+                            <span class="lang-en-only">Integrated</span>
+                            <span class="lang-fr-only">Intégré</span>
+                        </span></td>
                     </tr>
                     <tr>
-                        <td>3</td>
-                        <td>شركة السلام</td>
-                        <td>1</td>
-                        <td><span class="badge inactive">منتهي</span></td>
+                        <td>
+                            <span class="lang-ar-only">الموارد البشرية</span>
+                            <span class="lang-en-only">Human Resources</span>
+                            <span class="lang-fr-only">Ressources humaines</span>
+                        </td>
+                        <td>
+                            <span class="lang-ar-only">الرواتب، الإجازات، الحضور</span>
+                            <span class="lang-en-only">Salaries, leaves, attendance</span>
+                            <span class="lang-fr-only">Salaires, congés, présence</span>
+                        </td>
+                        <td><span class="badge-status">
+                            <span class="lang-ar-only">متكاملة</span>
+                            <span class="lang-en-only">Integrated</span>
+                            <span class="lang-fr-only">Intégré</span>
+                        </span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="lang-ar-only">النقل المدرسي</span>
+                            <span class="lang-en-only">School Transportation</span>
+                            <span class="lang-fr-only">Transport scolaire</span>
+                        </td>
+                        <td>
+                            <span class="lang-ar-only">المسارات، السائقين، المركبات</span>
+                            <span class="lang-en-only">Routes, drivers, vehicles</span>
+                            <span class="lang-fr-only">Itinéraires, chauffeurs, véhicules</span>
+                        </td>
+                        <td><span class="badge-status">
+                            <span class="lang-ar-only">متكاملة</span>
+                            <span class="lang-en-only">Integrated</span>
+                            <span class="lang-fr-only">Intégré</span>
+                        </span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="lang-ar-only">المكتبة</span>
+                            <span class="lang-en-only">Library</span>
+                            <span class="lang-fr-only">Bibliothèque</span>
+                        </td>
+                        <td>
+                            <span class="lang-ar-only">سجلات الكتب، الاستعارة</span>
+                            <span class="lang-en-only">Book records, borrowing</span>
+                            <span class="lang-fr-only">Registres de livres, emprunts</span>
+                        </td>
+                        <td><span class="badge-status">
+                            <span class="lang-ar-only">متكاملة</span>
+                            <span class="lang-en-only">Integrated</span>
+                            <span class="lang-fr-only">Intégré</span>
+                        </span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="lang-ar-only">الدرجات</span>
+                            <span class="lang-en-only">Grades</span>
+                            <span class="lang-fr-only">Notes</span>
+                        </td>
+                        <td>
+                            <span class="lang-ar-only">الامتحانات، التقييمات، التقارير</span>
+                            <span class="lang-en-only">Exams, assessments, reports</span>
+                            <span class="lang-fr-only">Examens, évaluations, rapports</span>
+                        </td>
+                        <td><span class="badge-status">
+                            <span class="lang-ar-only">متكاملة</span>
+                            <span class="lang-en-only">Integrated</span>
+                            <span class="lang-fr-only">Intégré</span>
+                        </span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="lang-ar-only">الأصول</span>
+                            <span class="lang-en-only">Assets</span>
+                            <span class="lang-fr-only">Actifs</span>
+                        </td>
+                        <td>
+                            <span class="lang-ar-only">تسجيل الأجهزة، الأثاث، المركبات</span>
+                            <span class="lang-en-only">Devices, furniture, vehicles</span>
+                            <span class="lang-fr-only">Appareils, mobilier, véhicules</span>
+                        </td>
+                        <td><span class="badge-status">
+                            <span class="lang-ar-only">متكاملة</span>
+                            <span class="lang-en-only">Integrated</span>
+                            <span class="lang-fr-only">Intégré</span>
+                        </span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="lang-ar-only">التقويم</span>
+                            <span class="lang-en-only">Calendar</span>
+                            <span class="lang-fr-only">Calendrier</span>
+                        </td>
+                        <td>
+                            <span class="lang-ar-only">الفعاليات والمواعيد الأكاديمية</span>
+                            <span class="lang-en-only">Academic events and dates</span>
+                            <span class="lang-fr-only">Événements et dates académiques</span>
+                        </td>
+                        <td><span class="badge-status">
+                            <span class="lang-ar-only">متكاملة</span>
+                            <span class="lang-en-only">Integrated</span>
+                            <span class="lang-fr-only">Intégré</span>
+                        </span></td>
                     </tr>
                 </tbody>
             </table>
-        </section>
+        </div>
 
-        <!-- قسم المشاريع -->
-        <section id="projects" class="section">
-            <h2><i class="fas fa-project-diagram"></i> المشاريع</h2>
-            <div class="project-list">
-                <div class="project-card">
-                    <h3>مشروع المنتزه</h3>
-                    <p><strong>العميل:</strong> شركة النخبة</p>
-                    <p><strong>المدة:</strong> 6 أشهر</p>
-                    <span class="badge active">قيد التنفيذ</span>
-                </div>
-                <div class="project-card">
-                    <h3>مشروع الواحة</h3>
-                    <p><strong>العميل:</strong> مؤسسة الأمل</p>
-                    <p><strong>المدة:</strong> 4 أشهر</p>
-                    <span class="badge inactive">مكتمل</span>
-                </div>
-            </div>
-        </section>
+        <!-- رسالة دعائية -->
+        <div class="cta-section">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeVx9U1UkWpQTERwNsZVEtp_wc4tB_xv0nEJU38K-HP-lAU1A/viewform?usp=header" class="btn-primary"><i class="fas fa-rocket"></i>
+                <span class="lang-ar-only">اطلب العرض الآن</span>
+                <span class="lang-en-only">Get the Offer Now</span>
+                <span class="lang-fr-only">Obtenez l'offre maintenant</span>
+            </a>
+            <p style="margin-top: 20px; color: #4b5563;">
+                <span class="lang-ar-only">تواصل معنا للحصول على نسخة تجريبية مجانية</span>
+                <span class="lang-en-only">Contact us for a free trial version</span>
+                <span class="lang-fr-only">Contactez-nous pour une version d'essai gratuite</span>
+            </p>
+        </div>
 
-        <!-- قسم بنود الأعمال -->
-        <section id="boq" class="section">
-            <h2><i class="fas fa-list"></i> بنود الأعمال (BOQ)</h2>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>البند</th>
-                        <th>الوصف</th>
-                        <th>الكمية</th>
-                        <th>سعر الوحدة</th>
-                        <th>الإجمالي</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>أعمال الحفر</td>
-                        <td>500 م³</td>
-                        <td>150 ج.م</td>
-                        <td>75,000 ج.م</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>الخرسانة</td>
-                        <td>200 م³</td>
-                        <td>1,200 ج.م</td>
-                        <td>240,000 ج.م</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>التشجير</td>
-                        <td>100 شجرة</td>
-                        <td>500 ج.م</td>
-                        <td>50,000 ج.م</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+    </main>
 
-        <!-- قسم التقارير -->
-        <section id="reports" class="section">
-            <h2><i class="fas fa-chart-bar"></i> التقارير والتحليلات</h2>
-            <div class="report-cards">
-                <div class="report-card">
-                    <i class="fas fa-file-invoice"></i>
-                    <h4>تقرير المشاريع</h4>
-                    <p>عرض جميع المشاريع وحالتها</p>
-                    <button onclick="alert('سيتم تصدير التقرير')">تصدير</button>
-                </div>
-                <div class="report-card">
-                    <i class="fas fa-money-bill-wave"></i>
-                    <h4>تقرير مالي</h4>
-                    <p>ملخص الإيرادات والمصروفات</p>
-                    <button onclick="alert('سيتم تصدير التقرير')">تصدير</button>
-                </div>
-            </div>
-        </section>
+    <footer>
+        <div class="container">
+            <p>© 2026 نظام Our School – 
+                <span class="lang-ar-only">جميع الحقوق محفوظة</span>
+                <span class="lang-en-only">All Rights Reserved</span>
+                <span class="lang-fr-only">Tous droits réservés</span>
+            </p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+                <span class="lang-ar-only">للاستفسار:</span>
+                <span class="lang-en-only">Contact:</span>
+                <span class="lang-fr-only">Contact:</span>
+                <a href="mailto:mostafait@hotmail.com">mostafait@hotmail.com</a> 
+                <span style="direction: ltr; display: inline-block;">| 01005158985</span>
+            </p>
+        </div>
+    </footer>
 
-    </div>
+    <!-- JavaScript للتحكم في إظهار/إخفاء التفاصيل وتبديل اللغة -->
+    <script>
+        // دالة تبديل اللغة
+        function switchLanguage(lang) {
+            // تغيير class على body
+            document.body.className = 'lang-' + lang;
+            
+            // تغيير اتجاه الصفحة
+            if (lang === 'ar') {
+                document.documentElement.dir = 'rtl';
+                document.documentElement.lang = 'ar';
+            } else {
+                document.documentElement.dir = 'ltr';
+                document.documentElement.lang = lang;
+            }
+            
+            // تحديث حالة الأزرار
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.lang === lang) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // إغلاق جميع البطاقات المفتوحة عند تغيير اللغة (لإعادة ضبط النصوص)
+            document.querySelectorAll('.card.expanded').forEach(card => {
+                card.classList.remove('expanded');
+                const hint = card.querySelector('.expand-hint');
+                if (hint) {
+                    hint.innerHTML = '<i class="fas fa-chevron-down"></i> ' + 
+                        (lang === 'ar' ? 'اضغط لعرض التفاصيل' : 
+                         lang === 'en' ? 'Click to show details' : 
+                         'Cliquez pour afficher les détails');
+                }
+            });
+            
+            // حفظ اللغة في localStorage
+            localStorage.setItem('preferred-lang', lang);
+        }
 
-    <script src="script.js"></script>
+        // دالة تبديل حالة البطاقة
+        function toggleCard(cardElement) {
+            cardElement.classList.toggle('expanded');
+            const hint = cardElement.querySelector('.expand-hint');
+            const currentLang = document.body.className.replace('lang-', '');
+            
+            if (cardElement.classList.contains('expanded')) {
+                hint.innerHTML = '<i class="fas fa-chevron-up"></i> ' + 
+                    (currentLang === 'ar' ? 'اضغط لإخفاء التفاصيل' : 
+                     currentLang === 'en' ? 'Click to hide details' : 
+                     'Cliquez pour masquer les détails');
+            } else {
+                hint.innerHTML = '<i class="fas fa-chevron-down"></i> ' + 
+                    (currentLang === 'ar' ? 'اضغط لعرض التفاصيل' : 
+                     currentLang === 'en' ? 'Click to show details' : 
+                     'Cliquez pour afficher les détails');
+            }
+        }
+
+        // دعم لوحة المفاتيح
+        document.querySelectorAll('.card').forEach(card => {
+            card.setAttribute('tabindex', '0');
+            card.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleCard(this);
+                }
+            });
+        });
+
+        // استعادة اللغة المحفوظة عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferred-lang') || 'ar';
+            switchLanguage(savedLang);
+        });
+    </script>
+
 </body>
 </html>
