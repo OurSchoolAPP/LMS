@@ -640,6 +640,18 @@
                 <button class="lang-btn" data-lang="fr" onclick="switchLanguage('fr')">FR</button>
             </div>
 
+
+            <img width="400px" src="Logo.png" />
+
+            <!--<div class="logo">Our <span>School</span></div>-->
+
+            <p class="tagline">
+                <span class="lang-ar-only">نظام إدارة المدارس المتكامل</span>
+                <span class="lang-en-only">Comprehensive School Management System</span>
+                <span class="lang-fr-only">Système de gestion scolaire complet</span>
+            </p>
+
+
             <!-- الشارة العلوية الجديدة -->
             <div class="top-badge">
                 <span class="badge-item">
@@ -653,14 +665,7 @@
                 </span>
             </div>
 
-            <div class="logo">Our <span>School</span></div>
-            
-            <p class="tagline">
-                <span class="lang-ar-only">نظام إدارة المدارس المتكامل – من الألف إلى الياء</span>
-                <span class="lang-en-only">Comprehensive School Management System – A to Z</span>
-                <span class="lang-fr-only">Système de gestion scolaire complet – De A à Z</span>
-            </p>
-            
+
             <div class="offer-badge">
                 <i class="fas fa-tags"></i>
                 <span class="lang-ar-only">خصم 70% حتى نهاية أغسطس!</span>
@@ -678,20 +683,33 @@
 
     <main class="container">
 
+
+
+
+
+
+
+
         <!-- بطاقات الميزات الرئيسية -->
         <h2 class="section-title">
-            <img width="400px" src="Logo.png" />
-            <br/>
             <span class="lang-ar-only">الميزات الرئيسية</span>
             <span class="lang-en-only">Main Features</span>
             <span class="lang-fr-only">Caractéristiques principales</span>
         </h2>
+
+
+        <h2 class="section-title">
+            <img width="600px" src="TLM.png" />
+        </h2>
+
         <p style="text-align: center; color: #6b7280; margin-top: -15px; margin-bottom: 20px; font-size: 0.95rem;">
             <i class="fas fa-hand-pointer" style="color: #facc15;"></i>
             <span class="lang-ar-only">اضغط على أي بطاقة لقراءة التفاصيل الكاملة</span>
             <span class="lang-en-only">Click on any card to read full details</span>
             <span class="lang-fr-only">Cliquez sur n'importe quelle carte pour lire les détails complets</span>
         </p>
+
+
         <div class="grid-4" id="featuresGrid">
             <!-- البطاقة 1: شؤون الطلاب -->
             <div class="card" onclick="toggleCard(this)">
@@ -1139,31 +1157,24 @@
         </p>
         <div class="clients-grid">
             <div class="client-card">
-                <div class="client-icon"><i class="fas fa-school"></i></div>
-                <div class="client-name">مدارس طيبة المتكاملة</div>
-                <div class="client-type">مدرسة خاصة (بنين وبنات)</div>
-                <div class="client-location">القاهرة - مصر</div>
+                <div class="client-icon"><i class="fas fa-university"></i></div>
+                <div class="client-name">مدارس خاصة</div>
                 <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
             </div>
             <div class="client-card">
-                <div class="client-icon"><i class="fas fa-university"></i></div>
-                <div class="client-name">طيبة الامريكية</div>
-                <div class="client-type">مدرسة دولية (منهج أمريكي)</div>
-                <div class="client-location">القاهرة - مصر</div>
+                <div class="client-icon"><i class="fas fa-school "></i></div>
+                <div class="client-name">مدارس دولية امريكية</div>
+
                 <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
             </div>
             <div class="client-card">
                 <div class="client-icon"><i class="fas fa-graduation-cap"></i></div>
-                <div class="client-name">المدارس البريطانية بالقاهرة</div>
-                <div class="client-type">مدرسة دولية (منهج بريطانية)</div>
-                <div class="client-location">القاهرة - مصر</div>
+                <div class="client-name">مدارس دولية بريطانية</div>
                 <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
             </div>
             <div class="client-card">
                 <div class="client-icon"><i class="fas fa-landmark"></i></div>
-                <div class="client-name">سيبس المتقدمة للغات</div>
-                <div class="client-type">مدرسة خاصة (شبه دوليه)</div>
-                <div class="client-location">القاهرة - مصر</div>
+                <div class="client-name">مدارس شبه دولية</div>
                 <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
             </div>
         </div>
@@ -1182,72 +1193,66 @@
         </p>
         <div class="gallery">
             <div class="gallery-item">
-                <img 
-                    src="Dashboard.jpg" 
-                    alt="لوحة التحكم - نظام إدارة المدارس"
-                    loading="lazy"
-                />
-                <div class="caption"><i class="fas fa-chart-pie"></i> 
+                <img src="Dashboard.jpg"
+                     alt="لوحة التحكم - نظام إدارة المدارس"
+                     loading="lazy" />
+                <div class="caption">
+                    <i class="fas fa-chart-pie"></i>
                     <span class="lang-ar-only">لوحة التحكم الرئيسية</span>
                     <span class="lang-en-only">Main Dashboard</span>
                     <span class="lang-fr-only">Tableau de bord principal</span>
                 </div>
             </div>
             <div class="gallery-item">
-                <img 
-                    src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&h=400&fit=crop&crop=center" 
-                    alt="إدارة الطلاب - نظام إدارة المدارس"
-                    loading="lazy"
-                />
-                <div class="caption"><i class="fas fa-users"></i> 
+                <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&h=400&fit=crop&crop=center"
+                     alt="إدارة الطلاب - نظام إدارة المدارس"
+                     loading="lazy" />
+                <div class="caption">
+                    <i class="fas fa-users"></i>
                     <span class="lang-ar-only">إدارة شؤون الطلاب</span>
                     <span class="lang-en-only">Student Affairs Management</span>
                     <span class="lang-fr-only">Gestion des affaires étudiantes</span>
                 </div>
             </div>
             <div class="gallery-item">
-                <img 
-                    src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop&crop=center" 
-                    alt="النظام المحاسبي - نظام إدارة المدارس"
-                    loading="lazy"
-                />
-                <div class="caption"><i class="fas fa-coins"></i> 
+                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop&crop=center"
+                     alt="النظام المحاسبي - نظام إدارة المدارس"
+                     loading="lazy" />
+                <div class="caption">
+                    <i class="fas fa-coins"></i>
                     <span class="lang-ar-only">النظام المحاسبي</span>
                     <span class="lang-en-only">Accounting System</span>
                     <span class="lang-fr-only">Système comptable</span>
                 </div>
             </div>
             <div class="gallery-item">
-                <img 
-                    src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&h=400&fit=crop&crop=center" 
-                    alt="النقل المدرسي - نظام إدارة المدارس"
-                    loading="lazy"
-                />
-                <div class="caption"><i class="fas fa-bus"></i> 
+                <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&h=400&fit=crop&crop=center"
+                     alt="النقل المدرسي - نظام إدارة المدارس"
+                     loading="lazy" />
+                <div class="caption">
+                    <i class="fas fa-bus"></i>
                     <span class="lang-ar-only">إدارة النقل المدرسي</span>
                     <span class="lang-en-only">School Transportation Management</span>
                     <span class="lang-fr-only">Gestion du transport scolaire</span>
                 </div>
             </div>
             <div class="gallery-item">
-                <img 
-                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&crop=center" 
-                    alt="التقارير والتحليلات - نظام إدارة المدارس"
-                    loading="lazy"
-                />
-                <div class="caption"><i class="fas fa-chart-bar"></i> 
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&crop=center"
+                     alt="التقارير والتحليلات - نظام إدارة المدارس"
+                     loading="lazy" />
+                <div class="caption">
+                    <i class="fas fa-chart-bar"></i>
                     <span class="lang-ar-only">التقارير والتحليلات</span>
                     <span class="lang-en-only">Reports and Analytics</span>
                     <span class="lang-fr-only">Rapports et analyses</span>
                 </div>
             </div>
             <div class="gallery-item">
-                <img 
-                    src="Hr.jpg" 
-                    alt="إدارة الموارد البشرية - نظام إدارة المدارس"
-                    loading="lazy"
-                />
-                <div class="caption"><i class="fas fa-user-tie"></i> 
+                <img src="Hr.jpg"
+                     alt="إدارة الموارد البشرية - نظام إدارة المدارس"
+                     loading="lazy" />
+                <div class="caption">
+                    <i class="fas fa-user-tie"></i>
                     <span class="lang-ar-only">إدارة الموارد البشرية</span>
                     <span class="lang-en-only">Human Resources Management</span>
                     <span class="lang-fr-only">Gestion des ressources humaines</span>
@@ -1262,42 +1267,50 @@
             <span class="lang-fr-only">Notre plateforme est adaptée pour</span>
         </h2>
         <div class="roles-grid">
-            <div class="role-item"><i class="fas fa-user-graduate"></i> 
+            <div class="role-item">
+                <i class="fas fa-user-graduate"></i>
                 <span class="lang-ar-only">الطالب</span>
                 <span class="lang-en-only">Student</span>
                 <span class="lang-fr-only">Étudiant</span>
             </div>
-            <div class="role-item"><i class="fas fa-user-friends"></i> 
+            <div class="role-item">
+                <i class="fas fa-user-friends"></i>
                 <span class="lang-ar-only">ولي الأمر</span>
                 <span class="lang-en-only">Parent</span>
                 <span class="lang-fr-only">Parent</span>
             </div>
-            <div class="role-item"><i class="fas fa-chalkboard-teacher"></i> 
+            <div class="role-item">
+                <i class="fas fa-chalkboard-teacher"></i>
                 <span class="lang-ar-only">المعلم</span>
                 <span class="lang-en-only">Teacher</span>
                 <span class="lang-fr-only">Enseignant</span>
             </div>
-            <div class="role-item"><i class="fas fa-user-tie"></i> 
+            <div class="role-item">
+                <i class="fas fa-user-tie"></i>
                 <span class="lang-ar-only">رئيس القسم</span>
                 <span class="lang-en-only">Head of Department</span>
                 <span class="lang-fr-only">Chef de département</span>
             </div>
-            <div class="role-item"><i class="fas fa-user-cog"></i> 
+            <div class="role-item">
+                <i class="fas fa-user-cog"></i>
                 <span class="lang-ar-only">الإداري</span>
                 <span class="lang-en-only">Administrator</span>
                 <span class="lang-fr-only">Administrateur</span>
             </div>
-            <div class="role-item"><i class="fas fa-user-graduate"></i> 
+            <div class="role-item">
+                <i class="fas fa-user-graduate"></i>
                 <span class="lang-ar-only">مدير المرحلة</span>
                 <span class="lang-en-only">Stage Manager</span>
                 <span class="lang-fr-only">Directeur de stage</span>
             </div>
-            <div class="role-item"><i class="fas fa-user-tie"></i> 
+            <div class="role-item">
+                <i class="fas fa-user-tie"></i>
                 <span class="lang-ar-only">مدير المدرسة</span>
                 <span class="lang-en-only">School Principal</span>
                 <span class="lang-fr-only">Directeur d'école</span>
             </div>
-            <div class="role-item"><i class="fas fa-crown"></i> 
+            <div class="role-item">
+                <i class="fas fa-crown"></i>
                 <span class="lang-ar-only">صاحب المدرسة</span>
                 <span class="lang-en-only">School Owner</span>
                 <span class="lang-fr-only">Propriétaire de l'école</span>
@@ -1343,11 +1356,13 @@
                             <span class="lang-en-only">Registration, records, parents</span>
                             <span class="lang-fr-only">Inscription, dossiers, parents</span>
                         </td>
-                        <td><span class="badge-status">
-                            <span class="lang-ar-only">متكاملة</span>
-                            <span class="lang-en-only">Integrated</span>
-                            <span class="lang-fr-only">Intégré</span>
-                        </span></td>
+                        <td>
+                            <span class="badge-status">
+                                <span class="lang-ar-only">متكاملة</span>
+                                <span class="lang-en-only">Integrated</span>
+                                <span class="lang-fr-only">Intégré</span>
+                            </span>
+                        </td>
                     </tr>
                     <tr>
                         <td>
@@ -1360,11 +1375,13 @@
                             <span class="lang-en-only">Fees, discounts, installments, reports</span>
                             <span class="lang-fr-only">Frais, remises, échéanciers, rapports</span>
                         </td>
-                        <td><span class="badge-status">
-                            <span class="lang-ar-only">متكاملة</span>
-                            <span class="lang-en-only">Integrated</span>
-                            <span class="lang-fr-only">Intégré</span>
-                        </span></td>
+                        <td>
+                            <span class="badge-status">
+                                <span class="lang-ar-only">متكاملة</span>
+                                <span class="lang-en-only">Integrated</span>
+                                <span class="lang-fr-only">Intégré</span>
+                            </span>
+                        </td>
                     </tr>
                     <tr>
                         <td>
@@ -1377,11 +1394,13 @@
                             <span class="lang-en-only">Salaries, leaves, attendance</span>
                             <span class="lang-fr-only">Salaires, congés, présence</span>
                         </td>
-                        <td><span class="badge-status">
-                            <span class="lang-ar-only">متكاملة</span>
-                            <span class="lang-en-only">Integrated</span>
-                            <span class="lang-fr-only">Intégré</span>
-                        </span></td>
+                        <td>
+                            <span class="badge-status">
+                                <span class="lang-ar-only">متكاملة</span>
+                                <span class="lang-en-only">Integrated</span>
+                                <span class="lang-fr-only">Intégré</span>
+                            </span>
+                        </td>
                     </tr>
                     <tr>
                         <td>
@@ -1394,11 +1413,13 @@
                             <span class="lang-en-only">Routes, drivers, vehicles</span>
                             <span class="lang-fr-only">Itinéraires, chauffeurs, véhicules</span>
                         </td>
-                        <td><span class="badge-status">
-                            <span class="lang-ar-only">متكاملة</span>
-                            <span class="lang-en-only">Integrated</span>
-                            <span class="lang-fr-only">Intégré</span>
-                        </span></td>
+                        <td>
+                            <span class="badge-status">
+                                <span class="lang-ar-only">متكاملة</span>
+                                <span class="lang-en-only">Integrated</span>
+                                <span class="lang-fr-only">Intégré</span>
+                            </span>
+                        </td>
                     </tr>
                     <tr>
                         <td>
@@ -1411,11 +1432,13 @@
                             <span class="lang-en-only">Book records, borrowing</span>
                             <span class="lang-fr-only">Registres de livres, emprunts</span>
                         </td>
-                        <td><span class="badge-status">
-                            <span class="lang-ar-only">متكاملة</span>
-                            <span class="lang-en-only">Integrated</span>
-                            <span class="lang-fr-only">Intégré</span>
-                        </span></td>
+                        <td>
+                            <span class="badge-status">
+                                <span class="lang-ar-only">متكاملة</span>
+                                <span class="lang-en-only">Integrated</span>
+                                <span class="lang-fr-only">Intégré</span>
+                            </span>
+                        </td>
                     </tr>
                     <tr>
                         <td>
@@ -1428,11 +1451,13 @@
                             <span class="lang-en-only">Exams, assessments, reports</span>
                             <span class="lang-fr-only">Examens, évaluations, rapports</span>
                         </td>
-                        <td><span class="badge-status">
-                            <span class="lang-ar-only">متكاملة</span>
-                            <span class="lang-en-only">Integrated</span>
-                            <span class="lang-fr-only">Intégré</span>
-                        </span></td>
+                        <td>
+                            <span class="badge-status">
+                                <span class="lang-ar-only">متكاملة</span>
+                                <span class="lang-en-only">Integrated</span>
+                                <span class="lang-fr-only">Intégré</span>
+                            </span>
+                        </td>
                     </tr>
                     <tr>
                         <td>
@@ -1445,11 +1470,13 @@
                             <span class="lang-en-only">Devices, furniture, vehicles</span>
                             <span class="lang-fr-only">Appareils, mobilier, véhicules</span>
                         </td>
-                        <td><span class="badge-status">
-                            <span class="lang-ar-only">متكاملة</span>
-                            <span class="lang-en-only">Integrated</span>
-                            <span class="lang-fr-only">Intégré</span>
-                        </span></td>
+                        <td>
+                            <span class="badge-status">
+                                <span class="lang-ar-only">متكاملة</span>
+                                <span class="lang-en-only">Integrated</span>
+                                <span class="lang-fr-only">Intégré</span>
+                            </span>
+                        </td>
                     </tr>
                     <tr>
                         <td>
@@ -1462,11 +1489,13 @@
                             <span class="lang-en-only">Academic events and dates</span>
                             <span class="lang-fr-only">Événements et dates académiques</span>
                         </td>
-                        <td><span class="badge-status">
-                            <span class="lang-ar-only">متكاملة</span>
-                            <span class="lang-en-only">Integrated</span>
-                            <span class="lang-fr-only">Intégré</span>
-                        </span></td>
+                        <td>
+                            <span class="badge-status">
+                                <span class="lang-ar-only">متكاملة</span>
+                                <span class="lang-en-only">Integrated</span>
+                                <span class="lang-fr-only">Intégré</span>
+                            </span>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -1474,7 +1503,8 @@
 
         <!-- رسالة دعائية -->
         <div class="cta-section">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeVx9U1UkWpQTERwNsZVEtp_wc4tB_xv0nEJU38K-HP-lAU1A/viewform?usp=header" class="btn-primary"><i class="fas fa-rocket"></i>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeVx9U1UkWpQTERwNsZVEtp_wc4tB_xv0nEJU38K-HP-lAU1A/viewform?usp=header" class="btn-primary">
+                <i class="fas fa-rocket"></i>
                 <span class="lang-ar-only">اطلب العرض الآن</span>
                 <span class="lang-en-only">Get the Offer Now</span>
                 <span class="lang-fr-only">Obtenez l'offre maintenant</span>
